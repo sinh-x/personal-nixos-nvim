@@ -52,10 +52,12 @@ with final.pkgs.lib; let
     alpha-nvim
     persistence-nvim
     bufferline-nvim
-    harpoon
+    (mkNvimPlugin inputs.harpoon2 "harpoon")
 
     mini-nvim
     vim-wakatime
+
+    (mkNvimPlugin inputs.obsidian-bridge "obsidian-bridge")
 
     # ^ nvim-cmp extensions
     # git integration plugins

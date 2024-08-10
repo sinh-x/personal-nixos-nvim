@@ -202,6 +202,11 @@ keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move [u]p half-page and center' })
 keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'move DOWN [f]ull-page and center' })
 keymap.set('n', '<C-b>', '<C-b>zz', { desc = 'move UP full-page and center' })
 
+keymap.set('x', '<leader>p', '"_dP', { desc = 'Deletes to void register and paste over' })
+keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Copy to system clipboard' })
+keymap.set({ 'n', 'v' }, '<leader>Y', '"+Y', { desc = 'Copy to system clipboard' })
+keymap.set({ 'n', 'v' }, '<leader>D', '"_d', { desc = 'Delete to void register' })
+
 --- Disabled keymaps [enable at your own risk]
 
 -- Automatic management of search highlight

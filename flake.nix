@@ -14,6 +14,14 @@
       url = "github:R-nvim/cmp-r";
       flake = false;
     };
+    harpoon2 = {
+      url = "github:ThePrimeagen/harpoon/harpoon2";
+      flake = false;
+    };
+    obsidian-bridge = {
+      url = "github:oflisback/obsidian-bridge.nvim";
+      flake = false;
+    };
 
     # Add bleeding-edge plugins here.
     # They can be updated with `nix flake update` (make sure to commit the generated flake.lock)
