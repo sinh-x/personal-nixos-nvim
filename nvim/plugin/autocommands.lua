@@ -5,6 +5,16 @@ vim.g.did_load_autocommands_plugin = true
 
 local api = vim.api
 
+-- autosave when lose focus
+api.nvim_create_autocmd('FocusLost', {
+  callback = function()
+    if vim.api.nvim_get_mode().mode == 'i' then
+      vim.cmd [[stopinsert]]
+    end
+    vim.cmd [[wa]]
+  end,
+})
+
 local tempdirgroup = api.nvim_create_augroup('tempdir', { clear = true })
 -- Do not set undofile for files in /tmp
 api.nvim_create_autocmd('BufWritePre', {
