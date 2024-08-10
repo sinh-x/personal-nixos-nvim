@@ -10,4 +10,3 @@ ob.setup {
   obsidian_server_address = 'http://localhost:27123',
 }
 
-require('crates').setup {}

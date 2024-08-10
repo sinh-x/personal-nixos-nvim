@@ -3,9 +3,6 @@ if vim.g.did_load_completion_plugin then
 end
 vim.g.did_load_completion_plugin = true
 
-require('lspconfig').r_language_server.setup {}
-require('lspconfig').rust_analyzer.setup {}
-
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
