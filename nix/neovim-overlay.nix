@@ -52,6 +52,7 @@ with final.pkgs.lib; let
     alpha-nvim
     persistence-nvim
     bufferline-nvim
+    harpoon
 
     mini-nvim
     vim-wakatime

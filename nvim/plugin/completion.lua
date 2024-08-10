@@ -175,3 +175,25 @@ end, { noremap = false, desc = '[cmp] cmdline history' })
 vim.keymap.set({ 'c' }, '<C-c>', function()
   complete_with_source('cmdline')
 end, { noremap = false, desc = '[cmp] cmdline' })
+
+cmp.setup.filetype('r', {
+  sources = cmp.config.sources({
+    {
+      name = 'path',
+      priority = 1000,
+      option = {
+        trailing_slash = false,
+        label_trailing_slash = true,
+        get_cwd = function()
+          return vim.fn.getcwd()
+        end,
+      },
+    },
+    { name = 'cmp_r' },
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
+  }, {
+    { name = 'copilot' },
+  }),
+})

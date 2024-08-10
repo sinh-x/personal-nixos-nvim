@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cmp-r": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721144305,
+        "narHash": "sha256-3h+7q/x5xST50b9MdjR+9JULTwgn6kAyyrL5qhCtta0=",
+        "owner": "R-nvim",
+        "repo": "cmp-r",
+        "rev": "18b88eeb7e47996623b9aa0a763677ac00a16221",
+        "type": "github"
+      },
+      "original": {
+        "owner": "R-nvim",
+        "repo": "cmp-r",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -99,11 +115,29 @@
         "type": "github"
       }
     },
+    "rnvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722076047,
+        "narHash": "sha256-op8zEpJSyhiptfYOg4t2CLSMRq6+/W1ifII4l/sczjU=",
+        "owner": "R-nvim",
+        "repo": "R.nvim",
+        "rev": "6bbd927ce8c799e9de087a2c28a6b7d869fc2e4e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "R-nvim",
+        "repo": "R.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "cmp-r": "cmp-r",
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_2",
+        "rnvim": "rnvim"
       }
     },
     "systems": {
