@@ -21,6 +21,8 @@ keymap.set('n', ']b', vim.cmd.bnext, { silent = true, desc = 'next [b]uffer' })
 keymap.set('n', '[B', vim.cmd.bfirst, { silent = true, desc = 'first [B]uffer' })
 keymap.set('n', ']B', vim.cmd.blast, { silent = true, desc = 'last [B]uffer' })
 
+keymap.set('n', '<leader>bx', '<cmd>bn<cr><cmd>bdelete #<cr>', { desc = 'Delete buffer' })
+
 -- window list navigation
 keymap.set('n', '<C-Left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 keymap.set('n', '<C-Right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
