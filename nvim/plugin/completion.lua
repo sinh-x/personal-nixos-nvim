@@ -43,6 +43,7 @@ cmp.setup {
         nvim_lsp_document_symbol = '[LSP]',
         nvim_lua = '[API]',
         copilot = '[BOT]',
+        r = '[R]',
         path = '[PATH]',
         luasnip = '[SNIP]',
       },
@@ -108,7 +109,6 @@ cmp.setup {
     { name = 'nvim_lsp_signature_help', keyword_length = 3 },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'copilot' },
   },
   enabled = function()
     return vim.bo[0].buftype ~= 'prompt'
@@ -116,6 +116,18 @@ cmp.setup {
   experimental = {
     native_menu = false,
     ghost_text = true,
+  },
+}
+
+cmp.setup {
+  sources = {
+    { name = 'cmp_r' },
+  },
+}
+
+cmp.setup {
+  sources = {
+    { name = 'copilot' },
   },
 }
 

@@ -54,6 +54,7 @@ with final.pkgs.lib; let
     bufferline-nvim
 
     mini-nvim
+    vim-wakatime
 
     # ^ nvim-cmp extensions
     # git integration plugins
@@ -94,6 +95,9 @@ with final.pkgs.lib; let
     # (mkNvimPlugin inputs.wf-nvim "wf.nvim") # (example) keymap hints | https://github.com/Cassin01/wf.nvim
     # ^ bleeding-edge plugins from flake inputs
     which-key-nvim
+
+    (mkNvimPlugin inputs.rnvim "R.nvim")
+    (mkNvimPlugin inputs.cmp-r "cmp-r")
   ];
 
   extraPackages = with pkgs; [

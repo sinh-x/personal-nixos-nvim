@@ -16,12 +16,17 @@ keymap.set('n', '<leader>qq', ':qa!<CR>', { noremap = true, silent = true, desc 
 keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
 keymap.set('i', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true })
 -- Buffer list navigation
+keymap.set('n', '<S-L>', vim.cmd.bprevious, { silent = true, desc = 'previous [b]uffer' })
+keymap.set('n', '<S-H>', vim.cmd.bnext, { silent = true, desc = 'next [b]uffer' })
 keymap.set('n', '[b', vim.cmd.bprevious, { silent = true, desc = 'previous [b]uffer' })
 keymap.set('n', ']b', vim.cmd.bnext, { silent = true, desc = 'next [b]uffer' })
 keymap.set('n', '[B', vim.cmd.bfirst, { silent = true, desc = 'first [B]uffer' })
 keymap.set('n', ']B', vim.cmd.blast, { silent = true, desc = 'last [B]uffer' })
 
 keymap.set('n', '<leader>bx', '<cmd>bn<cr><cmd>bdelete #<cr>', { desc = 'Delete buffer' })
+keymap.set('n', '<leader>bo', '<cmd>BufferLineCloseOthers<cr>', { desc = 'Delete other buffers' })
+keymap.set('n', '<leader>bl', '<cmd>BufferLineCloseLeft<cr>', { desc = 'Delete left buffers' })
+keymap.set('n', '<leader>br', '<cmd>BufferLineCloseRight<cr>', { desc = 'Delete right buffers' })
 
 -- window list navigation
 keymap.set('n', '<C-Left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
