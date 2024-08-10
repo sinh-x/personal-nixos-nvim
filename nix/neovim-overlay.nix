@@ -44,6 +44,9 @@ with final.pkgs.lib; let
     cmp-cmdline-history # cmp command line history suggestions
     cmp-copilot # Copilot completion source
 
+    nvim-lspconfig
+    crates-nvim
+
     # Copilot
     CopilotChat-nvim # Copilot chat
 

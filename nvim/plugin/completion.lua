@@ -3,6 +3,9 @@ if vim.g.did_load_completion_plugin then
 end
 vim.g.did_load_completion_plugin = true
 
+require('lspconfig').r_language_server.setup {}
+require('lspconfig').rust_analyzer.setup {}
+
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 local luasnip = require('luasnip')
@@ -190,6 +193,27 @@ cmp.setup.filetype('r', {
       },
     },
     { name = 'cmp_r' },
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
+  }, {
+    { name = 'copilot' },
+  }),
+})
+
+cmp.setup.filetype('rust', {
+  sources = cmp.config.sources({
+    {
+      name = 'path',
+      priority = 1000,
+      option = {
+        trailing_slash = false,
+        label_trailing_slash = true,
+        get_cwd = function()
+          return vim.fn.getcwd()
+        end,
+      },
+    },
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'luasnip' },
