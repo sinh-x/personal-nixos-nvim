@@ -11,12 +11,21 @@ local diagnostic = vim.diagnostic
 -- Yank from current position till end of current line
 -- keymap.set('n', 'Y', 'y$', { silent = true, desc = '[Y]ank to end of line' })
 
+keymap.set('n', '<leader>qq', ':qa!<CR>', { noremap = true, silent = true, desc = 'Quit all no saving!' })
+
+keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
+keymap.set('i', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true })
 -- Buffer list navigation
 keymap.set('n', '[b', vim.cmd.bprevious, { silent = true, desc = 'previous [b]uffer' })
 keymap.set('n', ']b', vim.cmd.bnext, { silent = true, desc = 'next [b]uffer' })
 keymap.set('n', '[B', vim.cmd.bfirst, { silent = true, desc = 'first [B]uffer' })
 keymap.set('n', ']B', vim.cmd.blast, { silent = true, desc = 'last [B]uffer' })
 
+-- window list navigation
+keymap.set('n', '<C-Left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+keymap.set('n', '<C-Right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+keymap.set('n', '<C-Down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+keymap.set('n', '<C-Up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- Toggle the quickfix list (only opens if it is populated)
 local function toggle_qf_list()
   local qf_exists = false
@@ -133,7 +142,7 @@ keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
 
 local severity = diagnostic.severity
 
-keymap.set('n', '<space>e', function()
+keymap.set('n', '<space>de', function()
   local _, winid = diagnostic.open_float(nil, { scope = 'line' })
   if not winid then
     vim.notify('no diagnostics found', vim.log.levels.INFO)
@@ -179,7 +188,7 @@ local function toggle_spell_check()
   vim.opt.spell = not (vim.opt.spell:get())
 end
 
-keymap.set('n', '<leader>S', toggle_spell_check, { noremap = true, silent = true, desc = 'toggle [S]pell' })
+keymap.set('n', '<leader>uS', toggle_spell_check, { noremap = true, silent = true, desc = 'toggle [S]pell' })
 
 keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move [d]own half-page and center' })
 keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move [u]p half-page and center' })

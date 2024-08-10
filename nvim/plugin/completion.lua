@@ -108,7 +108,7 @@ cmp.setup {
     { name = 'nvim_lsp_signature_help', keyword_length = 3 },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'copilot' }
+    { name = 'copilot' },
   },
   enabled = function()
     return vim.bo[0].buftype ~= 'prompt'

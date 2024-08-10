@@ -15,7 +15,7 @@ with final.pkgs.lib; let
   pkgs-wrapNeovim = inputs.nixpkgs.legacyPackages.${pkgs.system};
 
   # This is the helper function that builds the Neovim derivation.
-  mkNeovim = pkgs.callPackage ./mkNeovim.nix { inherit pkgs-wrapNeovim; };
+  mkNeovim = pkgs.callPackage ./mkNeovim.nix {inherit pkgs-wrapNeovim;};
 
   # A plugin can either be a package or an attrset, such as
   # { plugin = <plugin>; # the package, e.g. pkgs.vimPlugins.nvim-cmp
@@ -42,10 +42,15 @@ with final.pkgs.lib; let
     cmp-nvim-lua # neovim lua API as completion source | https://github.com/hrsh7th/cmp-nvim-lua/
     cmp-cmdline # cmp command line suggestions
     cmp-cmdline-history # cmp command line history suggestions
+    cmp-copilot # Copilot completion source
 
     # Copilot
-    copilot-lua # Copilot completion source 
     CopilotChat-nvim # Copilot chat
+
+    conform-nvim
+
+    alpha-nvim
+    persistence-nvim
 
     # ^ nvim-cmp extensions
     # git integration plugins

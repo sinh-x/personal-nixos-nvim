@@ -9,9 +9,18 @@ local api = vim.api
 api.nvim_create_autocmd('FocusLost', {
   callback = function()
     if vim.api.nvim_get_mode().mode == 'i' then
-      vim.cmd [[stopinsert]]
+      vim.cmd([[stopinsert]])
     end
-    vim.cmd [[wa]]
+    vim.cmd([[wa]])
+  end,
+})
+
+api.nvim_create_autocmd('BufWritePre', {
+  callback = function()
+    require('conform').format {
+      lsp_format = 'fallback',
+      timeout_ms = 500,
+    }
   end,
 })
 
