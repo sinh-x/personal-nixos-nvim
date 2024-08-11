@@ -65,6 +65,7 @@ with final.pkgs.lib; let
     mini-nvim
     fidget-nvim
     lspsaga-nvim
+    outline-nvim
     trouble-nvim
     vim-wakatime
 
