@@ -11,7 +11,7 @@ api.nvim_create_autocmd('FocusLost', {
     if vim.api.nvim_get_mode().mode == 'i' then
       vim.cmd([[stopinsert]])
     end
-    vim.cmd([[wa]])
+    vim.cmd([[wa!]])
   end,
 })
 
