@@ -54,6 +54,9 @@ with final.pkgs.lib; let
     conform-nvim
 
     alpha-nvim
+    noice-nvim
+    dressing-nvim
+    nui-nvim
     persistence-nvim
     bufferline-nvim
     (mkNvimPlugin inputs.harpoon2 "harpoon")
