@@ -10,6 +10,15 @@ vim.g.skip_ts_context_comment_string_module = true
 configs.setup {
   -- ensure_installed = 'all',
   -- auto_install = false, -- Do not automatically install missing parsers when entering buffer
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = '<C-space>',
+      node_incremental = '<C-space>',
+      scope_incremental = false,
+      node_decremental = '<bs>',
+    },
+  },
   highlight = {
     enable = true,
     disable = function(_, buf)
@@ -48,7 +57,7 @@ configs.setup {
       },
     },
     swap = {
-      enable = true,
+      enable = false,
       swap_next = {
         ['<leader>a'] = '@parameter.inner',
       },
@@ -93,5 +102,5 @@ require('treesitter-context').setup {
 require('ts_context_commentstring').setup()
 
 -- Tree-sitter based folding
--- vim.opt.foldmethod = 'expr'
+vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

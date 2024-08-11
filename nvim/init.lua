@@ -11,12 +11,6 @@ opt.compatible = false
 
 vim.o.clipboard = 'unnamedplus'
 
--- Enable providers
-vim.g['clipboard'] = {
-  ['wl-copy'] = { enable = true },
-  ['xclip'] = { enable = true },
-}
-
 -- Enable true colour support
 if fn.has('termguicolors') then
   opt.termguicolors = true

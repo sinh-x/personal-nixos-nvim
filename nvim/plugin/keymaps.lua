@@ -144,8 +144,25 @@ keymap.set('c', '%%', function()
   end
 end, { expr = true, desc = "expand to current buffer's directory" })
 
-keymap.set('n', '<space>tn', vim.cmd.tabnew, { desc = '[t]ab: [n]ew' })
-keymap.set('n', '<space>tq', vim.cmd.tabclose, { desc = '[t]ab: [q]uit/close' })
+keymap.set('n', '<leader><tab>n', vim.cmd.tabnew, { desc = 'tab: [n]ew' })
+keymap.set('n', '<leader><tab>x', vim.cmd.tabclose, { desc = 'tab: [q]uit/close' })
+keymap.set('n', '<leader><tab><Right>', vim.cmd.tabnext, { desc = 'tab: Right' })
+keymap.set('n', '<leader><tab><Left>', vim.cmd.tabprev, { desc = 'tab: Left' })
+keymap.set('n', '<leader><tab>1', function()
+  vim.cmd('tabn 1')
+end, { desc = 'tab: go to index 1' })
+keymap.set('n', '<leader><tab>2', function()
+  vim.cmd('tabn 2')
+end, { desc = 'tab: go to index 2' })
+keymap.set('n', '<leader><tab>3', function()
+  vim.cmd('tabn 3')
+end, { desc = 'tab: go to index 3' })
+keymap.set('n', '<leader><tab>4', function()
+  vim.cmd('tabn 4')
+end, { desc = 'tab: go to index 4' })
+keymap.set('n', '<leader><tab>5', function()
+  vim.cmd('tabn 5')
+end, { desc = 'tab: go to index 5' })
 
 local severity = diagnostic.severity
 

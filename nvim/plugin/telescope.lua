@@ -71,10 +71,10 @@ end
 
 vim.keymap.set('n', '<leader><space>', function()
   builtin.find_files()
-end, { desc = '[t]elescope find files - ctrl[p] style' })
+end, { desc = 'telescope find files - ctrl[p] style' })
 vim.keymap.set('n', '<C-p>', builtin.oldfiles, { desc = '[telescope] old files' })
 vim.keymap.set('n', '<C-g>', builtin.live_grep, { desc = '[telescope] live grep' })
-vim.keymap.set('n', '<leader>sa', fuzzy_grep, { desc = '[t]elescope [f]uzzy grep' })
+vim.keymap.set('n', '<leader>sg', fuzzy_grep, { desc = 'telescope [f]uzzy grep' })
 
 vim.keymap.set('n', '<C-f>', live_grep_current_file_type, { desc = '[telescope] live grep filetype' })
 vim.keymap.set('n', '<leader>sf', fuzzy_grep_current_file_type, { desc = '[telescope] fuzzy grep filetype' })
@@ -82,10 +82,10 @@ vim.keymap.set(
   'n',
   '<leader>s*',
   grep_string_current_file_type,
-  { desc = '[t]elescope grep current string [*] in current filetype' }
+  { desc = 'telecope grep current string [*] in current filetype' }
 )
 vim.keymap.set('n', '<leader>*', builtin.grep_string, { desc = '[telescope] grep current string [*]' })
-vim.keymap.set('n', '<leader>sg', project_files, { desc = 'telescope project files [g]' })
+vim.keymap.set('n', '<leader>sp', project_files, { desc = 'telescope project files [g]' })
 vim.keymap.set('n', '<leader>sq', builtin.quickfix, { desc = 'telescope quickfix list [c]' })
 vim.keymap.set('n', '<leader>sc', builtin.command_history, { desc = 'telescope [c]ommand history' })
 vim.keymap.set('n', '<leader>sl', builtin.loclist, { desc = 'telescope [l]oclist' })
@@ -98,13 +98,17 @@ vim.keymap.set(
   builtin.current_buffer_fuzzy_find,
   { desc = '[t]elescope current [b]uffer [f]uzzy find' }
 )
-vim.keymap.set('n', '<leader>td', builtin.lsp_document_symbols, { desc = '[t]elescope lsp [d]ocument symbols' })
+
+vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = 'telescope lsp document symbols' })
 vim.keymap.set(
   'n',
   '<leader>so',
   builtin.lsp_dynamic_workspace_symbols,
   { desc = '[t]elescope lsp dynamic w[o]rkspace symbols' }
 )
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Telescope Keymaps' })
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Telescope Help pages' })
+vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = 'Telescope Help pages' })
 
 telescope.setup {
   defaults = {

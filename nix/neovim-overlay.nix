@@ -43,6 +43,7 @@ with final.pkgs.lib; let
     cmp-cmdline # cmp command line suggestions
     cmp-cmdline-history # cmp command line history suggestions
     cmp-copilot # Copilot completion source
+    # ^ nvim-cmp extensions
 
     nvim-lspconfig
     crates-nvim
@@ -56,13 +57,13 @@ with final.pkgs.lib; let
     persistence-nvim
     bufferline-nvim
     (mkNvimPlugin inputs.harpoon2 "harpoon")
+    indent-blankline-nvim
 
     mini-nvim
     vim-wakatime
 
     (mkNvimPlugin inputs.obsidian-bridge "obsidian-bridge")
 
-    # ^ nvim-cmp extensions
     # git integration plugins
     diffview-nvim # https://github.com/sindrets/diffview.nvim/
     neogit # https://github.com/TimUntersberger/neogit/
@@ -83,7 +84,7 @@ with final.pkgs.lib; let
     # language support
     # ^ language support
     # navigation/editing enhancement plugins
-    vim-unimpaired # predefined ] and [ navigation keymaps | https://github.com/tpope/vim-unimpaired/
+    # vim-unimpaired # predefined ] and [ navigation keymaps | https://github.com/tpope/vim-unimpaired/
     eyeliner-nvim # Highlights unique characters for f/F and t/T motions | https://github.com/jinh0/eyeliner.nvim
     nvim-treesitter-textobjects # https://github.com/nvim-treesitter/nvim-treesitter-textobjects/
     nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
