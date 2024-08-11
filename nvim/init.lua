@@ -18,13 +18,16 @@ end
 
 -- See :h <option> to see what the options do
 
+-- Create the undo directory if it doesn't exist
+vim.opt.undofile = true
+
 -- Search down into subfolders
 opt.path = vim.o.path .. '**'
 
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-opt.lazyredraw = true
+opt.lazyredraw = false
 opt.showmatch = true -- Highlight matching parentheses, etc
 opt.incsearch = true
 opt.hlsearch = true
