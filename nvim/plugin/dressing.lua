@@ -1,4 +1,4 @@
-if vim.g.did_load_dressing_plugin thedid_load_dressing_pluginp
+if vim.g.did_load_dressing_plugin then
   return
 end
 vim.g.did_load_dressing_plugin = true
