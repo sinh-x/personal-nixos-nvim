@@ -59,15 +59,18 @@ with final.pkgs.lib; let
     (mkNvimPlugin inputs.harpoon2 "harpoon")
     indent-blankline-nvim
     nvim-notify
+    tokyonight-nvim
+    catppuccin-nvim
 
     mini-nvim
+    trouble-nvim
     vim-wakatime
 
     (mkNvimPlugin inputs.obsidian-bridge "obsidian-bridge")
 
     # git integration plugins
     diffview-nvim # https://github.com/sindrets/diffview.nvim/
-    (mkNvimPlugin inputs.neogit "neogit") # https://github.com/TimUntersberger/neogit/
+    neogit # https://github.com/TimUntersberger/neogit/
     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
     vim-fugitive # https://github.com/tpope/vim-fugitive/
     # ^ git integration plugins

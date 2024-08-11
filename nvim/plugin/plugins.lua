@@ -10,3 +10,6 @@ ob.setup {
   obsidian_server_address = 'http://localhost:27123',
 }
 
+local colors = require('tokyonight.colors').setup() -- pass in any of the config options as explained above
+local util = require('tokyonight.util')
+vim.cmd([[colorscheme tokyonight]])

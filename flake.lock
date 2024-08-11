@@ -88,22 +88,6 @@
         "type": "github"
       }
     },
-    "neogit": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1721772336,
-        "narHash": "sha256-K9KbLRrEPfKGSbLl/dMoUcILsMmpv3kyCALmgX7if80=",
-        "owner": "NeogitOrg",
-        "repo": "neogit",
-        "rev": "2b74a777b963dfdeeabfabf84d5ba611666adab4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NeogitOrg",
-        "repo": "neogit",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1718714799,
@@ -186,7 +170,6 @@
         "flake-utils": "flake-utils",
         "gen-luarc": "gen-luarc",
         "harpoon2": "harpoon2",
-        "neogit": "neogit",
         "nixpkgs": "nixpkgs_2",
         "obsidian-bridge": "obsidian-bridge",
         "rnvim": "rnvim"

@@ -10,8 +10,4 @@ fidget
 lspsaga
 trouble
 
-## Neogit fix
-
-## Color scheme
-
 ## Keymap conflict

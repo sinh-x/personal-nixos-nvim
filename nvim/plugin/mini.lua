@@ -48,3 +48,11 @@ require('mini.surround').setup {
   -- Whether to disable showing non-error feedback
   silent = false,
 }
+
+require('mini.comment').setup {
+  options = {
+    custom_commentstring = function()
+      return require('ts_context_commentstring').calculate_commentstring() or vim.bo.commentstring
+    end,
+  },
+}
