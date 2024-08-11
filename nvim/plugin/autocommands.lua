@@ -6,7 +6,7 @@ vim.g.did_load_autocommands_plugin = true
 local api = vim.api
 
 -- autosave when lose focus
-api.nvim_create_autocmd('FocusLost', {
+api.nvim_create_autocmd('focuslost', {
   callback = function()
     if vim.api.nvim_get_mode().mode == 'i' then
       vim.cmd([[stopinsert]])
@@ -15,7 +15,7 @@ api.nvim_create_autocmd('FocusLost', {
   end,
 })
 
-api.nvim_create_autocmd('BufWritePre', {
+api.nvim_create_autocmd('bufwritepre', {
   callback = function()
     require('conform').format {
       lsp_format = 'fallback',
@@ -25,8 +25,8 @@ api.nvim_create_autocmd('BufWritePre', {
 })
 
 local tempdirgroup = api.nvim_create_augroup('tempdir', { clear = true })
--- Do not set undofile for files in /tmp
-api.nvim_create_autocmd('BufWritePre', {
+-- do not set undofile for files in /tmp
+api.nvim_create_autocmd('bufwritepre', {
   pattern = '/tmp/*',
   group = tempdirgroup,
   callback = function()
@@ -34,16 +34,16 @@ api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
--- Disable spell checking in terminal buffers
+-- disable spell checking in terminal buffers
 local nospell_group = api.nvim_create_augroup('nospell', { clear = true })
-api.nvim_create_autocmd('TermOpen', {
+api.nvim_create_autocmd('termopen', {
   group = nospell_group,
   callback = function()
     vim.wo[0].spell = false
   end,
 })
 
--- LSP
+-- lsp
 local keymap = vim.keymap
 
 local function preview_location_callback(_, result)
@@ -59,21 +59,69 @@ end
 
 local function peek_definition()
   local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+  return vim.lsp.buf_request(0, 'textdocument/definition', params, preview_location_callback)
 end
 
 local function peek_type_definition()
   local params = vim.lsp.util.make_position_params()
-  return vim.lsp.buf_request(0, 'textDocument/typeDefinition', params, preview_location_callback)
+  return vim.lsp.buf_request(0, 'textdocument/typedefinition', params, preview_location_callback)
 end
 
---- Don't create a comment string when hitting <Enter> on a comment line
-vim.api.nvim_create_autocmd('BufEnter', {
-  group = vim.api.nvim_create_augroup('DisableNewLineAutoCommentString', {}),
+--- don't create a comment string when hitting <enter> on a comment line
+vim.api.nvim_create_autocmd('bufenter', {
+  group = vim.api.nvim_create_augroup('disablenewlineautocommentstring', {}),
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions - { 'c', 'r', 'o' }
   end,
 })
+
+local lspgroup = api.nvim_create_augroup('userlspconfig', { clear = true })
+
+local function set_keymaps(bufnr, client)
+  local function desc(description)
+    return { noremap = true, silent = true, buffer = bufnr, desc = description }
+  end
+
+  local keymap_settings = {
+    { 'n', 'gD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration') },
+    { 'n', 'gd', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition') },
+    { 'n', '<space>gt', vim.lsp.buf.type_definition, desc('lsp [g]o to [t]ype definition') },
+    { 'n', 'K', vim.lsp.buf.hover, desc('[lsp] hover') },
+    { 'n', '<space>pd', peek_definition, desc('lsp [p]eek [d]efinition') },
+    { 'n', '<space>pt', peek_type_definition, desc('lsp [p]eek [t]ype definition') },
+    { 'n', 'gi', vim.lsp.buf.implementation, desc('lsp [g]o to [i]mplementation') },
+    { 'n', '<C-k>', vim.lsp.buf.signature_help, desc('[lsp] signature help') },
+    { 'n', '<space>wa', vim.lsp.buf.add_workspace_folder, desc('lsp add [w]orksp[a]ce folder') },
+    { 'n', '<space>wr', vim.lsp.buf.remove_workspace_folder, desc('lsp [w]orkspace folder [r]emove') },
+    {
+      'n',
+      '<space>wl',
+      function()
+        vim.print(vim.lsp.buf.list_workspace_folders())
+      end,
+      desc('[lsp] [w]orkspace folders [l]ist'),
+    },
+    { 'n', '<space>rn', vim.lsp.buf.rename, desc('lsp [r]e[n]ame') },
+    { 'n', '<space>wq', vim.lsp.buf.workspace_symbol, desc('lsp [w]orkspace symbol [q]') },
+    { 'n', '<space>dd', vim.lsp.buf.document_symbol, desc('lsp [dd]ocument symbol') },
+    { 'n', '<M-CR>', vim.lsp.buf.code_action, desc('[lsp] code action') },
+    { 'n', '<M-l>', vim.lsp.codelens.run, desc('[lsp] run code lens') },
+    { 'n', '<space>cr', vim.lsp.codelens.refresh, desc('lsp [c]ode lenses [r]efresh') },
+    { 'n', 'gr', vim.lsp.buf.references, desc('lsp [g]et [r]eferences') },
+    -- Add the rest of your keymaps here
+  }
+
+  for _, setting in ipairs(keymap_settings) do
+    keymap.set(unpack(setting))
+  end
+
+  if client and client.server_capabilities.inlayHintProvider then
+    keymap.set('n', '<space>h', function()
+      local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
+      vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
+    end, desc('[lsp] toggle inlay hints'))
+  end
+end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -81,46 +129,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local bufnr = ev.buf
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
 
-    -- Attach plugins
-    -- require('nvim-navic').attach(client, bufnr)
+    -- -- Attach plugins
+    -- -- require('nvim-navic').attach(client, bufnr)
 
     vim.cmd.setlocal('signcolumn=yes')
-    vim.bo[bufnr].bufhidden = 'hide'
 
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
-    local function desc(description)
-      return { noremap = true, silent = true, buffer = bufnr, desc = description }
-    end
-    keymap.set('n', 'gD', vim.lsp.buf.declaration, desc('lsp [g]o to [D]eclaration'))
-    keymap.set('n', 'gd', vim.lsp.buf.definition, desc('lsp [g]o to [d]efinition'))
-    keymap.set('n', '<space>gt', vim.lsp.buf.type_definition, desc('lsp [g]o to [t]ype definition'))
-    keymap.set('n', 'K', vim.lsp.buf.hover, desc('[lsp] hover'))
-    keymap.set('n', '<space>pd', peek_definition, desc('lsp [p]eek [d]efinition'))
-    keymap.set('n', '<space>pt', peek_type_definition, desc('lsp [p]eek [t]ype definition'))
-    keymap.set('n', 'gi', vim.lsp.buf.implementation, desc('lsp [g]o to [i]mplementation'))
-    keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, desc('[lsp] signature help'))
-    keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, desc('lsp add [w]orksp[a]ce folder'))
-    keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, desc('lsp [w]orkspace folder [r]emove'))
-    keymap.set('n', '<space>wl', function()
-      vim.print(vim.lsp.buf.list_workspace_folders())
-    end, desc('[lsp] [w]orkspace folders [l]ist'))
-    keymap.set('n', '<space>rn', vim.lsp.buf.rename, desc('lsp [r]e[n]ame'))
-    keymap.set('n', '<space>wq', vim.lsp.buf.workspace_symbol, desc('lsp [w]orkspace symbol [q]'))
-    keymap.set('n', '<space>dd', vim.lsp.buf.document_symbol, desc('lsp [dd]ocument symbol'))
-    keymap.set('n', '<M-CR>', vim.lsp.buf.code_action, desc('[lsp] code action'))
-    keymap.set('n', '<M-l>', vim.lsp.codelens.run, desc('[lsp] run code lens'))
-    keymap.set('n', '<space>cr', vim.lsp.codelens.refresh, desc('lsp [c]ode lenses [r]efresh'))
-    keymap.set('n', 'gr', vim.lsp.buf.references, desc('lsp [g]et [r]eferences'))
-    keymap.set('n', '<space>f', function()
-      vim.lsp.buf.format { async = true }
-    end, desc('[lsp] [f]ormat buffer'))
-    if client and client.server_capabilities.inlayHintProvider then
-      keymap.set('n', '<space>h', function()
-        local current_setting = vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }
-        vim.lsp.inlay_hint.enable(not current_setting, { bufnr = bufnr })
-      end, desc('[lsp] toggle inlay hints'))
-    end
+
+    set_keymaps(bufnr, client)
 
     -- Auto-refresh code lenses
     if not client then
@@ -140,19 +157,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
-api.nvim_create_autocmd('FileType', {
+api.nvim_create_autocmd('filetype', {
   pattern = 'r',
   callback = function()
     vim.api.nvim_buf_set_option(0, 'commentstring', '# %s')
   end,
 })
--- More examples, disabled by default
 
--- Toggle between relative/absolute line numbers
--- Show relative line numbers in the current buffer,
+-- more examples, disabled by default
+
+-- toggle between relative/absolute line numbers
+-- show relative line numbers in the current buffer,
 -- absolute line numbers in inactive buffers
 -- local numbertoggle = api.nvim_create_augroup('numbertoggle', { clear = true })
--- api.nvim_create_autocmd({ 'BufEnter', 'FocusGained', 'InsertLeave', 'CmdlineLeave', 'WinEnter' }, {
+-- api.nvim_create_autocmd({ 'bufenter', 'focusgained', 'insertleave', 'cmdlineleave', 'winenter' }, {
 --   pattern = '*',
 --   group = numbertoggle,
 --   callback = function()
@@ -161,7 +179,7 @@ api.nvim_create_autocmd('FileType', {
 --     end
 --   end,
 -- })
--- api.nvim_create_autocmd({ 'BufLeave', 'FocusLost', 'InsertEnter', 'CmdlineEnter', 'WinLeave' }, {
+-- api.nvim_create_autocmd({ 'bufleave', 'focuslost', 'insertenter', 'cmdlineenter', 'winleave' }, {
 --   pattern = '*',
 --   group = numbertoggle,
 --   callback = function()
