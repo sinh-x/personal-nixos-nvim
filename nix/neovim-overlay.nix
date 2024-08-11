@@ -63,6 +63,7 @@ with final.pkgs.lib; let
     catppuccin-nvim
 
     mini-nvim
+    lspsaga-nvim
     trouble-nvim
     vim-wakatime
 

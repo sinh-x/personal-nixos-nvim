@@ -12,4 +12,4 @@ ob.setup {
 
 local colors = require('tokyonight.colors').setup() -- pass in any of the config options as explained above
 local util = require('tokyonight.util')
-vim.cmd([[colorscheme tokyonight]])
+vim.cmd([[colorscheme tokyonight-moon]])

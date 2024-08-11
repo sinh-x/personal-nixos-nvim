@@ -75,8 +75,6 @@ vim.api.nvim_create_autocmd('bufenter', {
   end,
 })
 
-local lspgroup = api.nvim_create_augroup('userlspconfig', { clear = true })
-
 local function set_keymaps(bufnr, client)
   local function desc(description)
     return { noremap = true, silent = true, buffer = bufnr, desc = description }
