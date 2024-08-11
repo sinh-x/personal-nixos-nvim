@@ -105,10 +105,15 @@ cmp.setup {
   },
   sources = cmp.config.sources {
     -- The insertion order influences the priority of the sources
+    { name = 'path' },
     { name = 'nvim_lsp', keyword_length = 3 },
     { name = 'nvim_lsp_signature_help', keyword_length = 3 },
     { name = 'buffer' },
-    { name = 'path' },
+    { name = 'luasnip' },
+    { name = 'copilot' },
+    { name = 'cmp_r' },
+    { name = 'cmdline_history' },
+    { name = 'cmdline' },
   },
   enabled = function()
     return vim.bo[0].buftype ~= 'prompt'
@@ -116,18 +121,6 @@ cmp.setup {
   experimental = {
     native_menu = false,
     ghost_text = true,
-  },
-}
-
-cmp.setup {
-  sources = {
-    { name = 'cmp_r' },
-  },
-}
-
-cmp.setup {
-  sources = {
-    { name = 'copilot' },
   },
 }
 
@@ -199,7 +192,7 @@ cmp.setup.filetype('r', {
 })
 
 cmp.setup.filetype('rust', {
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     {
       name = 'path',
       priority = 1000,
@@ -214,7 +207,16 @@ cmp.setup.filetype('rust', {
     { name = 'nvim_lsp' },
     { name = 'buffer' },
     { name = 'luasnip' },
-  }, {
     { name = 'copilot' },
-  }),
+  },
+})
+
+cmp.setup.filetype('nix', {
+  sources = cmp.config.sources {
+    { name = 'path' },
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
+    { name = 'copilot' },
+  },
 })

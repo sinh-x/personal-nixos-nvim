@@ -6,7 +6,7 @@ vim.g.did_load_neogit_plugin = true
 local neogit = require('neogit')
 
 neogit.setup {
-  disable_builtin_notifications = true,
+  disable_builtin_notifications = false,
   disable_insert_on_commit = 'auto',
   integrations = {
     diffview = true,

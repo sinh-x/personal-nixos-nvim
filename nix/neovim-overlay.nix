@@ -58,6 +58,7 @@ with final.pkgs.lib; let
     bufferline-nvim
     (mkNvimPlugin inputs.harpoon2 "harpoon")
     indent-blankline-nvim
+    nvim-notify
 
     mini-nvim
     vim-wakatime
@@ -66,7 +67,7 @@ with final.pkgs.lib; let
 
     # git integration plugins
     diffview-nvim # https://github.com/sindrets/diffview.nvim/
-    neogit # https://github.com/TimUntersberger/neogit/
+    (mkNvimPlugin inputs.neogit "neogit") # https://github.com/TimUntersberger/neogit/
     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim/
     vim-fugitive # https://github.com/tpope/vim-fugitive/
     # ^ git integration plugins

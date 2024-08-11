@@ -6,6 +6,10 @@
     flake-utils.url = "github:numtide/flake-utils";
     gen-luarc.url = "github:mrcjkb/nix-gen-luarc-json";
 
+    neogit = {
+      url = "github:NeogitOrg/neogit";
+      flake = false;
+    };
     rnvim = {
       url = "github:R-nvim/R.nvim";
       flake = false;

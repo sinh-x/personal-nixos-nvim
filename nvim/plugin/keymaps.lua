@@ -8,6 +8,12 @@ local fn = vim.fn
 local keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
+-- Enable timeout for mapped sequences
+vim.o.timeout = true
+
+-- Set the timeout length to 500 milliseconds
+vim.o.timeoutlen = 500
+
 -- Yank from current position till end of current line
 -- keymap.set('n', 'Y', 'y$', { silent = true, desc = '[Y]ank to end of line' })
 
