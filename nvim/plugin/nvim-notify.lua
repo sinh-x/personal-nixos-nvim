@@ -20,12 +20,12 @@ notify.setup {
   end,
 }
 
-vim.keymap.nnoremap {
+vim.keymap.set(
+  'n',
   '<Leader>un',
   ':lua require("notify").dismiss({ silent = true, pending = true })<CR>',
-  silent = true,
-  description = 'Dismiss All Notifications',
-}
+  { silent = true, desc = 'Dismiss All Notifications' }
+)
 
 local filtered_message = { 'No information available' }
 
