@@ -66,6 +66,7 @@ with final.pkgs.lib; let
     catppuccin-nvim
 
     mini-nvim
+    ultimate-autopair-nvim
     undotree
     fidget-nvim
     lspsaga-nvim
